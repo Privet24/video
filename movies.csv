@@ -1,4 +1,4 @@
-﻿title_en;title_ua;year;description;poster_url
-The Shawshank Redemption;Побег из Шоушенка;1994;Two imprisoned men bond...;https://img.hurtom.com/i/2025/02/shawshank-poster_99.jpg
-Inception;Початок;2010;A thief who steals corporate...;https://toloka.to/photos/2305011806221710_f0_0.jpg
-
+title_en,title_ua,year,description,poster_url
+The Shawshank Redemption,Побег из Шоушенка,1994,Two imprisoned men bond...,https://img.hurtom.com/i/2025/02/shawshank-poster_99.jpg
+Inception,Початок,2010,A thief who steals corporate...,https://toloka.to/photos/2305011806221710_f0_0.jpg
+Крок 1: Конвертуйте Excel у CSV,,,,
