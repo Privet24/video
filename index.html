@@ -70,8 +70,7 @@
 
   <script>
   // Замініть fetch('movies.csv') на:
-const SHEET_ID = '
-1Ptz_myZ5FF5XndlODAiX4gw2GjZmG091Yy8C8meT9dk';
+const SHEET_ID = '1Ptz_myZ5FF5XndlODAiX4gw2GjZmG091Yy8C8meT9dk';
 const API_KEY = 'AIzaSyCIJjU1FfJ4sMvfJw_Vz9oEmw8fV83jEeQ'; // Отримайте тут: https://developers.google.com/sheets/api
 fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1?key=${API_KEY}`)
   .then(response => response.json())
