@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список фільмів з Excel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .movies-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .movie-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .movie-card:hover {
+      transform: translateY(-5px);
+    }
+    .movie-poster {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .movie-info {
+      padding: 15px;
+    }
+    .movie-title-en {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 5px 0;
+      color: #2c3e50;
+    }
+    .movie-title-ua {
+      font-size: 16px;
+      color: #7f8c8d;
+      margin: 5px 0;
+    }
+    .movie-year {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .movie-description {
+      margin-top: 10px;
+      color: #34495e;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Список фільмів</h1>
+  <div class="movies-container" id="movies-container">
+    <!-- Тут будуть картки фільмів -->
+  </div>
+
+  <script>
+    // Завантаження даних з CSV-файлу
+    fetch('movies.csv')
+      .then(response => response.text())
+      .then(data => {
+        const movies = parseCSV(data);
+        displayMovies(movies);
+      })
+      .catch(error => console.error('Помилка завантаження CSV:', error));
+
+    // Парсинг CSV у масив об'єктів
+    function parseCSV(csvText) {
+      const lines = csvText.split('\n');
+      const headers = lines[0].split(',').map(header => header.trim());
+      const movies = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',');
+        if (values.length === headers.length) {
+          const movie = {};
+          headers.forEach((header, index) => {
+            movie[header] = values[index].trim();
+          });
+          movies.push(movie);
+        }
+      }
+      return movies;
+    }
+
+    // Відображення фільмів на сторінці
+    function displayMovies(movies) {
+      const container = document.getElementById('movies-container');
+      container.innerHTML = '';
+
+      movies.forEach(movie => {
+        const movieCard = document.createElement('div');
+        movieCard.className = 'movie-card';
+        movieCard.innerHTML = `
+          <img src="${movie.poster_url}" alt="${movie.title_en}" class="movie-poster" onerror="this.src='https://via.placeholder.com/300x400?text=No+Poster'">
+          <div class="movie-info">
+            <div class="movie-title-en">${movie.title_en}</div>
+            <div class="movie-title-ua">${movie.title_ua}</div>
+            <div class="movie-year">Рік: ${movie.year}</div>
+            <div class="movie-description">${movie.description}</div>
+          </div>
+        `;
+        container.appendChild(movieCard);
+      });
+    }
+  </script>
+</body>
+</html>
